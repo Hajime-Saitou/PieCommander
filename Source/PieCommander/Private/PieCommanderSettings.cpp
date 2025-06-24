@@ -1,0 +1,26 @@
+// PieCommander
+// https://github.com/Hajime-Saitou/PieCommander
+// Copyright(c) 2025 Hajime Saito
+// MIT License
+
+#include "PieCommanderSettings.h"
+#include "Kismet/KismetSystemLibrary.h"
+
+#define LOCTEXT_NAMESPACE "PieCommanderSettings"
+
+UPieCommanderSettings::UPieCommanderSettings()
+{
+}
+
+void UPieCommanderSettings::ExecuteAllCommands(TArray<FPieCommandInformation> PieCommandLineInformation)
+{
+	for (auto item : PieCommandLineInformation)
+	{
+		if (!item.Disabled)
+		{
+			UKismetSystemLibrary::ExecuteConsoleCommand(Super::GetWorld(), item.CommandLine);
+		}
+	}
+}
+
+#undef LOCTEXT_NAMESPACE
