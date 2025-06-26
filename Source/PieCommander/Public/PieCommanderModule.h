@@ -12,6 +12,4 @@ class FPieCommanderModule final : public IModuleInterface
 public:
 	virtual void StartupModule() override;
 	virtual void ShutdownModule() override;
-
-	virtual bool OnModifiedSettings();
 };

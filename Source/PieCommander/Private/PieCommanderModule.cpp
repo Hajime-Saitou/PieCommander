@@ -9,7 +9,7 @@
 
 #define LOCTEXT_NAMESPACE "FPieCommanderModule"
 
-#define ADD_PIE_EVENT_DELEGATE(FOnPIEEvent) FEditorDelegates::FOnPIEEvent.AddLambda([settings](bool bIsSimulated) { settings->ExecuteAllCommands(settings->FOnPIEEvent);})
+#define ADD_PIE_EVENT_DELEGATE(FOnPIEEvent) FEditorDelegates::FOnPIEEvent.AddLambda([Settings](bool bIsSimulated) { Settings->ExecuteAllCommands(Settings->FOnPIEEvent);})
 #define REMOVE_PIE_EVENT_DELEGATE(FOnPIEEvent) FEditorDelegates::FOnPIEEvent.RemoveAll(this)
 
 void FPieCommanderModule::StartupModule()
@@ -23,8 +23,8 @@ void FPieCommanderModule::StartupModule()
 		LOCTEXT("Specific Console Commands for PIE", "Specific Console Commands for PIE"),
 		GetMutableDefault<UPieCommanderSettings>());
 
-		UPieCommanderSettings* settings = GetMutableDefault<UPieCommanderSettings>();
-		if (settings != nullptr)
+		UPieCommanderSettings* Settings = GetMutableDefault<UPieCommanderSettings>();
+		if (Settings != nullptr)
 		{
 			ADD_PIE_EVENT_DELEGATE(StartPIE);
 			ADD_PIE_EVENT_DELEGATE(PreBeginPIE);
@@ -62,14 +62,6 @@ ISettingsModule* SettingsModule = FModuleManager::GetModulePtr<ISettingsModule>(
 
 		SettingsModule->UnregisterSettings("Editor", "PieCommander", "PieCommander");
 	}
-}
-
-bool FPieCommanderModule::OnModifiedSettings()
-{
-	UPieCommanderSettings* Settings = GetMutableDefault<UPieCommanderSettings>();
-	Settings->SaveConfig();
-
-	return true;
 }
 
 IMPLEMENT_MODULE(FPieCommanderModule, PieCommander)

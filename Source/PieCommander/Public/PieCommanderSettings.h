@@ -15,14 +15,14 @@ struct FPieCommandInformation
 {
 	GENERATED_BODY()
 
-	UPROPERTY(Config, EditAnywhere)
+	UPROPERTY(Config, EditAnywhere, Category="PieCommander")
 	bool Disabled;
 
-	UPROPERTY(Config, EditAnywhere)
+	UPROPERTY(Config, EditAnywhere, Category="PieCommander")
 	FString CommandLine;
 };
 
-UCLASS(Config=Editor)
+UCLASS(Config=Editor, ProjectUserConfig)
 class UPieCommanderSettings : public UObject
 {
 	GENERATED_BODY()
@@ -68,4 +68,6 @@ public:
 
 	UFUNCTION()
 	void ExecuteAllCommands(TArray<FPieCommandInformation> PieCommandLineInformation);
+
+	virtual void PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent) override;
 };

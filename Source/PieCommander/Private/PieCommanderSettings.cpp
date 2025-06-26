@@ -23,4 +23,11 @@ void UPieCommanderSettings::ExecuteAllCommands(TArray<FPieCommandInformation> Pi
 	}
 }
 
+void UPieCommanderSettings::PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent)
+{
+	Super::PostEditChangeProperty(PropertyChangedEvent);
+	SaveConfig();
+}
+
+
 #undef LOCTEXT_NAMESPACE
