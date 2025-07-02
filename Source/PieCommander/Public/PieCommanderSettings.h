@@ -16,10 +16,10 @@ struct FPieCommandInformation
 	GENERATED_BODY()
 
 	UPROPERTY(Config, EditAnywhere, Category="PieCommander")
-	bool Disabled;
+	bool Enabled = true;
 
 	UPROPERTY(Config, EditAnywhere, Category="PieCommander")
-	FString CommandLine;
+	FString CommandLine = FString();
 };
 
 UCLASS(Config=Editor, ProjectUserConfig)

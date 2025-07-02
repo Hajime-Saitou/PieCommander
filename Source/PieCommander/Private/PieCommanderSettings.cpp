@@ -16,7 +16,7 @@ void UPieCommanderSettings::ExecuteAllCommands(TArray<FPieCommandInformation> Pi
 {
 	for (auto item : PieCommandLineInformation)
 	{
-		if (!item.Disabled)
+		if (item.Enabled)
 		{
 			UKismetSystemLibrary::ExecuteConsoleCommand(Super::GetWorld(), item.CommandLine);
 		}
